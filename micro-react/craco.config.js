@@ -21,10 +21,63 @@ module.exports = {
           libraryTarget: 'umd',
         },
       }
+      webpackConfig.optimization = {
+        splitChunks: {
+          chunks: 'async',
+          minSize: 20000,
+          minChunks: 1,
+          maxAsyncRequests: 30,
+          maxInitialRequests: 30,
+          cacheGroups: {
+            vendors: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              priority: 10,
+              enforce: true,
+              reuseExistingChunk: true, // 属性是重用切分的包，不切新的
+            },
+            // reactDepsVender: {
+            //   test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|@reduxjs\/toolkit\/dist)[\\/]/,
+            //   name: 'react-deps-lib',
+            //   enforce: true,
+            //   priority: 40,
+            //   reuseExistingChunk: true,
+            // },
+            // antdVender: {
+            //   name: 'ant-lib',
+            //   test: /[\\/]node_modules[\\/](@ant-design|antd\/lib|antd\/es)[\\/]/,
+            //   enforce: true,
+            //   priority: 30,
+            //   reuseExistingChunk: true,
+            // },
+            // codemirror: {
+            //   name: 'codemirror',
+            //   test: /[\\/]node_modules[\\/](codemirror)[\\/]/,
+            //   enforce: true,
+            //   priority: 30,
+            //   reuseExistingChunk: true,
+            // },
+            // wangeditor: {
+            //   name: 'wangeditor',
+            //   test: /[\\/]node_modules[\\/](@wangeditor)[\\/]/,
+            //   enforce: true,
+            //   priority: 30,
+            //   reuseExistingChunk: true,
+            // },
+            // echartsVender: {
+            //   name: 'echartsVender',
+            //   test: /[\\/]node_modules[\\/](echarts|zrender)[\\/]/,
+            //   enforce: true,
+            //   priority: 30,
+            //   reuseExistingChunk: true,
+            // },
+          },
+        },
+      }
+
       return webpackConfig;
     }
-
-  },
+  }
 }
 
 

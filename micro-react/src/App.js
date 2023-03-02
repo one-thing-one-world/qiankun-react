@@ -1,5 +1,13 @@
 import { useRoutes, useNavigate } from 'react-router-dom'
+import { lazy, Suspense } from "react"
+import './App.css'
+// import Page1 from './components/Page1'
+// import Page2 from './components/Page2'
+
 // import { useEffect } from "react"
+// import Page1 from './components/Page1'
+const Page1 = lazy(() => import(/* webpackChunkName: 'Page1' */  './components/Page1'))
+const Page2 = lazy(() => import(/* webpackChunkName: 'Page2' */ './components/Page2'))
 
 const Home = () => {
   const navigate = useNavigate()
@@ -12,6 +20,12 @@ const Home = () => {
     }}>
       goto table
     </div>
+    <Suspense fallback={<div>Loading...page1</div>}>
+      <Page1></Page1>
+      {/* </Suspense>
+    <Suspense fallback={<div>Loading...page2</div>}> */}
+      <Page2></Page2>
+    </Suspense>
   </div>
 }
 

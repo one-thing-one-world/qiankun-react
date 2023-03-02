@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+.page1-container{
+  height: 2000px;
+  width: 800px;
+  background: red;
+}
+.page2-container{
+  height: 2000px;
+  width: 800px;
+  background: blue;
+}
