@@ -26,19 +26,19 @@ function Layout() {
     registerMicroApps([
       {
         name: "micro-react", // app name registered
-        entry: "//localhost:3000",
+        entry: "//localhost:8081",
         container: "#micro-react",
         activeRule: "/gh/micro-react",
       },
       {
         name: "umi-react",
-        entry: "//localhost:8000",
+        entry: "//localhost:8082",
         container: "#umi-react",
         activeRule: "/gh/umi-react",
       },
        {
         name: "csms",
-        entry: "//localhost:8001",
+        entry: "//localhost:8082",
         container: "#csms",
         activeRule: "/gh/csms",
       },
