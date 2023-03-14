@@ -1,8 +1,11 @@
 import { useRoutes, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
+import ReactDOM from "react-dom"
 // import { useEffect } from "react"
 
 const Home = () => {
+  ReactDOM.createPortal(<div>portale</div>, document.body)
+
   return <div>
     <h1>
       micro-react-home-page
