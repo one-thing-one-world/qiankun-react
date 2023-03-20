@@ -1,21 +1,14 @@
 import React, { useState, useEffect, useRef } from "react"
 
-// export default function HOCView() {
-//   return (
-//     <div>HOCView</div>
-//   )
-// }
-
-const HOCView = (HocComponent) => {
+const HHOCView2 = (HocComponent) => {
   const [isShow, setIsShow] = useState(false)
-  const containerRef = useRef(null)
+  const containerRef2 = useRef(null)
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ intersectionRatio }) => {
+          console.log(entries, "entriesdd2", intersectionRatio)
           intersectionRatio > 0 && setIsShow(true)
-          console.log(entries, "entriesdd", intersectionRatio)
-          // intersectionRatio > 0 && setIsShow(true)
         }),
       {}
 
@@ -31,13 +24,12 @@ const HOCView = (HocComponent) => {
       // lists.forEach((tab) => {
       //   io.observe(tab)
       // })
-      // let lists = Array.from(document.querySelectorAll(".virtuals"))io.unobserve(element);
-
-      io.observe(containerRef.current)
+      // let lists = Array.from(document.querySelectorAll(".virtuals"))
+      io.observe(containerRef2.current)
     }, 200)
 
     // setTimeout(() => {
-    //   io.unobserve(containerRef.current)
+    //   io.unobserve(containerRef2.current)
     //   io.disconnect()
     // }, [1000])
   }, [])
@@ -45,15 +37,15 @@ const HOCView = (HocComponent) => {
   // useEffect(() => {
   //   console.log(comRef, "comRef")
   // }, [comRef])
+
+  useEffect(() => {
+    console.log(isShow, "isShow")
+  }, [isShow])
   return (props) => (
-    <div
-      className="virtuals"
-      ref={containerRef}
-      style={{ minHeight: isShow ? "unset" : "100px" }}
-    >
+    <div ref={containerRef2} style={{ minHeight: isShow ? "unset" : "400px" }}>
       {isShow ? <HocComponent {...props}></HocComponent> : props.children}
     </div>
   )
 }
 
-export default HOCView
+export default HHOCView2

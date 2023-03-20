@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react"
 
-function LazyImage({ src, alt }) {
-  const [imageSrc, setImageSrc] = useState(null);
-  const [imageRef, setImageRef] = useState(null);
+const LazyImage = ({ src, alt }) => {
+  const [isIntersecting, setIntersecting] = useState(false)
+  const imgRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setImageSrc(src);
-          observer.disconnect();
+          setIntersecting(true)
+          observer.unobserve(imgRef.current)
         }
       },
       {
         rootMargin: "0px 0px 50px 0px",
       }
-    );
+    )
 
-    if (imageRef) {
-      observer.observe(imageRef);
+    if (imgRef.current) {
+      observer.observe(imgRef.current)
     }
 
     return () => {
-      if (imageRef) {
-        observer.unobserve(imageRef);
+      if (imgRef.current) {
+        observer.unobserve(imgRef.current)
       }
-    };
-  }, [src, imageRef]);
+    }
+  }, [imgRef])
 
-  return <img style={{minWidth:'400px'}} ref={setImageRef} src={imageSrc} alt={alt} />;
+  return <img ref={imgRef} src={isIntersecting ? src : ""} alt={alt} />
 }
 
 export default LazyImage

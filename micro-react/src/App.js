@@ -11,7 +11,11 @@ import HOCView from './components/HOCView'
 
 // import { useEffect } from "react"
 import Page4 from './components/Page1'
+import Page5 from './components/Page2'
+
 import TestReact from './components/TestReact'
+import TestRef from './components/TestRef'
+import HHOCView2 from './components/HHOCView2'
 const Page1 = lazy(() => import(/* webpackChunkName: 'Page1' */  './components/Page1'))
 const Page2 = lazy(() => import(/* webpackChunkName: 'Page2' */ './components/Page2'))
 const Page3 = lazy(() => import(/* webpackChunkName: 'Page3' */ './components/Page3'))
@@ -80,80 +84,19 @@ let InstanceHelloWorld = WithHelloWorld(Apps)('tst')
 
 const Home = () => {
   const navigate = useNavigate()
-  useLayoutEffect(() => {
-    const callback = (entries) =>
-      entries.forEach((item, index) => {
-        console.log('container', item, index, entries)
-        if (item.intersectionRatio > 0) {
-          console.log(item, 'itemss')
-          let container = item.target
-          console.log(container.dataset.orderkey, 'orderkey', index, container.style.display)
-
-          // ReactDOM.createRoot(document.getElementById('page2'))
-          // let key = container.dataset.orderkey
-          let Cp = observerComponets[index].Com
-          ReactDOM.render(
-            <Suspense fallback={<div>Loading...page1</div>}>
-              <Cp></Cp>
-            </Suspense>, container)
-
-        }
-
-      })
-
-    const option = {
-      // threshold: 0.5,
-
-      // rootMargin: "20px",
-      // threshold: 0.5,
-      // rootMargin: "0px 0px 50px 0px",
 
 
-    }
-    const io = new IntersectionObserver(callback, option);
-
-
-
-
-    setTimeout(() => {
-      let lists = Array.from(document.querySelectorAll(".list-virtual"))
-      lists.forEach((tab) => {
-        io.observe(tab)
-      })
-      console.log(lists, "lists")
-
-    }, 200)
-  }, [])
-
-  // useEffect(() => {
-
-  //   setTimeout(() => {
-  //     io.observe(document.getElementById('page1'))
-  //     io.observe(document.getElementById('page2'))
-  //     io.observe(document.getElementById('page3'))
-  //     // var p = document.createElement("p");
-  //     // var content2 = document.getElementById('page2')
-  //     // const VDOM = <h1 id='title'>Hello, React</h1>
-  //     //2. 渲染虚拟DOM到页面
-  //     // ReactDOM.render(VDOM, document.getElementById('page2'))
-  //     // content2.appendChild(p)
-  //     // console.log((<div>5555666</div>).nodeType())
-
-  //     // console.log(document.body,p)
-  //     // document.body.appendChild(p);
-
-  //   }, 100)
-
-  //   ReactDOM.createPortal(<div>portale</div>, document.body)
-  // }, []);
 
   useEffect(() => {
     // hocFn(observerComponets)
+    console.log(process.env.REACT_APP_API_PATH, 'REACT_APP_API_PATH')
   }, []);
 
   let FnCom = HOCView(Page4)
+  let HocCom = HHOCView2(Page5)
+
   return <div>
-    <h1>
+    {/* <h1>
       micro-react-home-page
     </h1>
     <div onClick={() => {
@@ -161,34 +104,14 @@ const Home = () => {
     }}>
       goto table
     </div>
+    <TestReact></TestReact>
+    <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
+      alt="hello img"
+    ></LazyImage> */}
 
-    <div id="testHoc">
-      {/* <Instance></Instance> */}
-    </div>
-    {/* <InstanceHelloWorld testProps="testProps"></InstanceHelloWorld> */}
-    {/* Instance */}
-
-    <div>
-      <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
-        alt="hello img"
-      ></LazyImage>
-    </div>
-    <div>
-      {/* <Page2></Page2> */}
-
-    </div>
-
-    <div>
-      <TestReact></TestReact>
-    </div>
     <Suspense fallback={<div>Loading...page1</div>}>
-      <div id='page1' data-orderkey={0} className='list-virtual'>
-        {/* <Page1></Page1> */}
-      </div>
-      <div id='page2' data-orderkey={1} className='list-virtual'>
-        {/* <Page2></Page2> */}
-      </div>
-      <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
+      <Page1></Page1>
+      {/* <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
         alt="hello img"
       ></LazyImage>
       <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
@@ -199,15 +122,101 @@ const Home = () => {
       ></LazyImage>
       <LazyImage src='https://www.pythonthree.com/wp-content/uploads/2023/02/1676346033-%E5%9C%A8Mac%E4%B8%8A%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85ChatGPT.jpg'
         alt="hello img"
-      ></LazyImage >
-      <div id='page3' data-orderkey={2} className='list-virtual'>
-      </div>
+      ></LazyImage > */}
     </Suspense>
+    <div>3333</div>
+    {/* <TestRef></TestRef>
+    <TestRef></TestRef>
+
+    <TestRef></TestRef>
+
+    <TestRef></TestRef> */}
+    {/* <HocCom>
+      <div>
+        loadingsss2
+      </div>
+    </HocCom>
+    <FnCom>
+      <div>
+        loadingsss1
+      </div>
+    </FnCom>
+    <div>2343</div> */}
+    {/* <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
     <FnCom>
       <div>
         loadingsss
       </div>
     </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom>
+    <FnCom>
+      <div>
+        loadingsss
+      </div>
+    </FnCom> */}
 
   </div>
 

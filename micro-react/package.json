@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "dotenv-cli": "^7.1.0",
     "qiankun": "^2.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -15,7 +16,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
+    "start:dev": "dotenv -e .env.dev craco start",
+    "start:prod": "dotenv -e .env.prod craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
